@@ -46,6 +46,8 @@ OPTIONS                                                              *oil-option
       delete_to_trash = false,
       -- Skip the confirmation popup for simple operations
       skip_confirm_for_simple_edits = false,
+      -- Skip the confirmation popup for complex operations
+      skip_confirm_for_complex_edits = false,
       -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
       prompt_save_on_select_new_entry = true,
       -- Oil will automatically delete hidden buffers after this delay
@@ -244,7 +246,8 @@ save({opts}, {cb})                                                      *oil.sav
     Parameters:
       {opts} `nil|table`
           {confirm} `nil|boolean` Show confirmation when true, never when false,
-                    respect skip_confirm_for_simple_edits if nil
+                    respect skip_confirm_for_simple_edits and
+                    skip_confirm_for_complex_edits if nil
       {cb}   `nil|fun(err: nil|string)` Called when mutations complete.
 
     Note:

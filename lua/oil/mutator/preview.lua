@@ -62,9 +62,14 @@ M.show = vim.schedule_wrap(function(actions, should_confirm, cb)
     cb(true)
     return
   end
-  if should_confirm == nil and config.skip_confirm_for_simple_edits and is_simple_edit(actions) then
-    cb(true)
-    return
+  if should_confirm == nil then
+    local simple_edit = is_simple_edit(actions)
+    if (config.skip_confirm_for_simple_edits and simple_edit)
+      or (config.skip_confirm_for_complex_edits and not simple_edit)
+    then
+      cb(true)
+      return
+    end
   end
 
   -- Create the buffer
